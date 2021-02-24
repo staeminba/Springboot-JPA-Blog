@@ -23,7 +23,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data //Getter Setter
-@NoArgsConstructor //Bean 생서아
+@NoArgsConstructor //Bean 생성자
 @AllArgsConstructor //전체 생성자
 @Builder //빌더 패턴
 @Entity //테이블 생성
@@ -38,7 +38,6 @@ public class Board {
 	@Lob //대용량 데이터 사용시
 	private String content; //섬머노트 라이브러리 <html> 태그가 섞여서 디자인이 됨
 	
-	@ColumnDefault("0") //int 므로 ' '필요 없음 
 	private int count;//조회수
 	
 	//private int userId; //DB는 오브제그트를 저장 못하므로  FK 사용,

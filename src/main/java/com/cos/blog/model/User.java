@@ -23,13 +23,13 @@ import lombok.NoArgsConstructor;
 @Builder //빌더 패턴
 //ORM -> Object -> 테이블로 매핑해주는 기술
 @Entity//User 클래스가 MySQL에 테이블이 생성됨.
+//@DynamicInsert //insert할때 null인 컬럼은 제외
 public class User {
-	private enum RoleType {ADMIN,  USER, MANAGER}
 	@Id //Primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //프로젝트에서 연결된 DB의 넘버링 전략을 따라간다 ,시퀀스(oracle),auto_increment(my_sql)
 	private int id; 
 	
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 30, unique = true)
 	private String username;
 	
 	@Column(nullable = false, length = 100) //123456 => 해쉬 (비밀번호 암호화)
@@ -41,6 +41,7 @@ public class User {
 	//@ColumnDefault("'USER'")
 	//private String role;
 	
+	//DB는 RollType이란것이 없다.
 	@Enumerated(EnumType.STRING)
 	private RoleType role; //Enum 을 쓰는게 좋다. //admin , user, manager (maganer 같은 오타가 들어올수 있음) 
 	
